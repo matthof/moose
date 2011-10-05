@@ -4,6 +4,8 @@ use strict;
 use warnings;
 
 use Package::DeprecationManager 0.07 -deprecations => {
+    'non-arrayref form of enum'         => '2.0700',
+    'non-arrayref form of duck_type'    => '2.0700',
     'optimized type constraint sub ref' => '2.0000',
     'default is for Native Trait'       => '1.14',
     'default default for Native Trait'  => '1.14',

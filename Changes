@@ -3,6 +3,11 @@ for, noteworthy changes.
 
 {{$NEXT}}
 
+  [DEPRECATIONS]
+
+  * The non-arrayref forms of enum and duck_type have been deprecated. See
+    Moose::Manual::Delta for details. (doy)
+
   [ENHANCEMENTS]
 
   * The super() subroutine now carps if you pass it arguments. These arguments
