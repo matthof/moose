@@ -6,7 +6,7 @@ use 5.008;
 
 use Scalar::Util 'blessed';
 use Carp         'carp', 'confess';
-use Class::Load  'is_class_loaded';
+use Class::Load  'is_class_loaded', 'load_class';
 
 use Moose::Deprecated;
 use Moose::Exporter;
@@ -39,6 +39,13 @@ use Moose::Util ();
 
 use Moose::Meta::Attribute::Native;
 
+sub throw_exception {
+    my ($self, @args_to_exception) = @_;
+    my $class = "Moose::Exception::$self";
+    load_class( $class );
+    die $class->new( @args_to_exception );
+}
+
 sub throw_error {
     # FIXME This
     shift;
@@ -50,8 +57,7 @@ sub extends {
 
     unless ( @_ )
     {
-        require Moose::Exception::ExtendsMissingArgs;
-        die Moose::Exception::ExtendsMissingArgs->new;
+        throw_exception( ExtendsMissingArgs => {} );
     }
     # this checks the metaclass to make sure
     # it is correct, sometimes it can get out
