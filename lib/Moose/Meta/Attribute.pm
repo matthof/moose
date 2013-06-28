@@ -300,7 +300,9 @@ sub _process_is_option {
     ### -------------------------
 
     if ( $options->{is} eq 'ro' ) {
-        throw_exception("AccessorMustReadWrite" => attribute_name => $name )
+        throw_exception("AccessorMustReadWrite" => attribute_name => $name,
+                                                   params         => $options,
+                       )
             if exists $options->{accessor};
         $options->{reader} ||= $name;
     }
