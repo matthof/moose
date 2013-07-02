@@ -547,7 +547,7 @@ sub superclasses {
         my ($name, $opts) = @{ $super };
         load_class($name, $opts);
         my $meta = Class::MOP::class_of($name);
-        $self->throw_error("You cannot inherit from a Moose Role ($name)")
+        throw_exception( CanExtendOnlyClasses => role => $meta )
             if $meta && $meta->isa('Moose::Meta::Role')
     }
     return $self->SUPER::superclasses(map { $_->[0] } @{ $supers });
