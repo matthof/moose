@@ -1207,12 +1207,9 @@ sub _find_delegate_metaclass {
     my $self = shift;
     if (my $class = $self->_isa_metadata) {
         unless ( is_class_loaded($class) ) {
-            $self->throw_error(
-                sprintf(
-                    'The %s attribute is trying to delegate to a class which has not been loaded - %s',
-                    $self->name, $class
-                )
-            );
+            throw_exception( DelegationToAClassWhichIsNotLoaded => attribute  => $self,
+                                                                   class_name => $class
+                           );
         }
         # we might be dealing with a non-Moose class,
         # and need to make our own metaclass. if there's
