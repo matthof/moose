@@ -1218,12 +1218,9 @@ sub _find_delegate_metaclass {
     }
     elsif (my $role = $self->_does_metadata) {
         unless ( is_class_loaded($class) ) {
-            $self->throw_error(
-                sprintf(
-                    'The %s attribute is trying to delegate to a role which has not been loaded - %s',
-                    $self->name, $role
-                )
-            );
+            throw_exception( DelegationToARoleWhichIsNotLoaded => attribute => $self,
+                                                                  role_name => $role
+                           );
         }
 
         return Class::MOP::class_of($role);
