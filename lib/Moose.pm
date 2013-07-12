@@ -66,7 +66,9 @@ sub has {
     my $meta = shift;
     my $name = shift;
 
-    Moose->throw_error('Usage: has \'name\' => ( key => value, ... )')
+    throw_exception( BadHasProvided => class           => $meta,
+                                       attribute_name  => $name
+                   )
         if @_ % 2 == 1;
 
     my %context = Moose::Util::_caller_info;
