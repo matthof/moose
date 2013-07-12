@@ -1235,7 +1235,7 @@ sub _find_delegate_metaclass {
         return Class::MOP::class_of($role);
     }
     else {
-        $self->throw_error("Cannot find delegate metaclass for attribute " . $self->name);
+	throw_exception( CannotFindDelegateMetaclass => attribute => $self );
     }
 }
 
