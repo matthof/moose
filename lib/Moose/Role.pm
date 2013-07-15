@@ -78,7 +78,7 @@ sub override {
 }
 
 sub inner {
-    croak "Roles cannot support 'inner'";
+    throw_exception("RolesDoNotSupportInner");
 }
 
 sub augment {
