@@ -82,7 +82,7 @@ sub inner {
 }
 
 sub augment {
-    croak "Roles cannot support 'augment'";
+    throw_exception("RolesDoNotSupportAugment");
 }
 
 Moose::Exporter->setup_import_methods(
