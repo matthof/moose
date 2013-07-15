@@ -31,7 +31,7 @@ sub requires {
 
 sub excludes {
     my $meta = shift;
-    croak "Must specify at least one role" unless @_;
+    throw_exception( MustSpecifyAtleastOneRole => role => $meta ) unless @_;
     $meta->add_excluded_roles(@_);
 }
 
