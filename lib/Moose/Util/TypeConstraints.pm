@@ -420,8 +420,9 @@ sub enum {
     # - SL
     if ( ref $type_name eq 'ARRAY' ) {
         @values == 0
-            || __PACKAGE__->_throw_error("enum called with an array reference and additional arguments. Did you mean to parenthesize the enum call's parameters?");
-
+            || throw_exception( EnumCalledWithAnArrayRefAndAdditionalArgs => array => $type_name,
+                                                                             args  => \@values
+                              );
         @values    = @$type_name;
         $type_name = undef;
     }
