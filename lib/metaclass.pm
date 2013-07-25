@@ -4,7 +4,6 @@ package metaclass;
 use strict;
 use warnings;
 
-use Carp         'confess';
 use Class::Load  'load_class';
 use Scalar::Util 'blessed';
 use Try::Tiny;
