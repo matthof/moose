@@ -4,9 +4,9 @@ package Class::MOP::Method::Overload;
 use strict;
 use warnings;
 
-use Carp 'confess';
-
 use base 'Class::MOP::Method';
+
+use Moose::Util 'throw_exception';
 
 sub wrap {
     my $class = shift;
@@ -14,7 +14,9 @@ sub wrap {
     unshift @args, 'body' if @args % 2 == 1;
     my %params = @args;
 
-    confess "operator is required"
+    throw_exception( OperatorIsRequired => params => \%params,
+                                           class  => $class
+                   )
         unless exists $params{operator};
 
     return $class->SUPER::wrap(
