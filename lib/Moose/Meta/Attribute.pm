@@ -719,7 +719,7 @@ sub _inline_check_constraint {
                 . '};'.
                 $self->_inline_throw_exception( 'ValidationFailedForInlineTypeConstraint => '.
                                                 'type_constraint_message => $msg , '.
-                                                'class_name              => ref($_[0]), '.
+                                                'class_name              => $class_name, '.
                                                 'attribute_name          => "'.$attr_name.'",'.
                                                 'value                   => '.$value
                 ).';',
@@ -803,6 +803,8 @@ sub _eval_environment {
 
         $env = { %$env, %{ $tc_obj->inline_environment } };
     }
+
+    $env->{'$class_name'} = \($self->associated_class->name);
 
     # XXX ugh, fix these
     $env->{'$attr'} = \$self
