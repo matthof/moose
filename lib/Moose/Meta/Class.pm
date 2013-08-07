@@ -545,6 +545,7 @@ sub _eval_environment {
         # error class at this point, but we should still get rid of this
         # at some point
         '$meta'  => \$self,
+        '$class_name' => \($self->name),
     };
 }
 
