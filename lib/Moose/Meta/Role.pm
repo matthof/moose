@@ -6,7 +6,6 @@ use metaclass;
 
 use Class::Load qw(load_class);
 use Scalar::Util 'blessed';
-use Carp         'confess';
 use Devel::GlobalDestruction 'in_global_destruction';
 
 use Moose::Meta::Class;
