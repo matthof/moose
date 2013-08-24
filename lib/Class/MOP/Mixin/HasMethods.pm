@@ -7,7 +7,6 @@ use Class::MOP::Method::Meta;
 use Class::MOP::Method::Overload;
 
 use Scalar::Util 'blessed';
-use Carp         'confess';
 use Sub::Name    'subname';
 
 use overload ();
@@ -39,8 +38,9 @@ sub wrap_method_body {
     my ( $self, %args ) = @_;
 
     ( 'CODE' eq ref $args{body} )
-        || confess "Your code block must be a CODE reference";
-
+        || throw_exception( CodeBlockMustBeACodeRef => instance => $self,
+                                                       params   => \%args
+                          );
     $self->method_metaclass->wrap(
         package_name => $self->name,
         %args,
